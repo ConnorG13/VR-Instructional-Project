@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
 		[Space(10)]
 		public bool oneTime;
+		public bool startEventAfterText;
 
 		public UnityEngine.Events.UnityEvent OnTaskStart;
 		public UnityEngine.Events.UnityEvent OnTaskComplete;
@@ -50,9 +51,9 @@ public class GameManager : MonoBehaviour
 	private string winStory;
 
 	[Space(10)]
-	[SerializeField] private int maxTasks;
+	[SerializeField] private int maxTasks = 10;
 
-	private enum TaskState { gameStart, finishTask, end }
+	private enum TaskState { gameStart, inProgress, finishTask, end }
 	private TaskState taskState = TaskState.gameStart;
 
 	private int activeTask;
@@ -120,12 +121,15 @@ public class GameManager : MonoBehaviour
 
 		if (taskState == TaskState.finishTask)
 		{
+			Debug.Log("I'm here now :D");
+
 			//wait for eye contact
 			yield return new WaitForSeconds(1f);
 			yield return new WaitUntil(() => lookingAtInstructions);
 
 			//choose new task
 			ChooseTask();
+			yield break;
 		}
 
 		if (taskState == TaskState.end)
@@ -135,9 +139,10 @@ public class GameManager : MonoBehaviour
 
 			//load game over scene
 			SceneManager.LoadScene(1);
+			yield break;
 		}
 
-		yield return null;
+		yield break;
 	}
 
 	IEnumerator DoTask(Task task)
@@ -145,13 +150,21 @@ public class GameManager : MonoBehaviour
 		//reset called task completion in case of random selection
 		task.complete = false;
 
+		//set task state to in progress so that text end won't call anything
+		taskState = TaskState.inProgress;
+
+		//call task start event for anything that needs it (before text)
+		if (!task.startEventAfterText)
+			task.OnTaskStart.Invoke();
+
 		//print out task story text 
 		textOver = false;
 		text.StartTyping(task.story);
 		yield return new WaitUntil(() => textOver);
 
-		//call task start event for anything that needs it
-		task.OnTaskStart.Invoke();
+		//call task start event for anything that needs it (after text)
+		if (task.startEventAfterText)
+			task.OnTaskStart.Invoke();
 
 		//check if task has time limit
 		if (task.isTimed)
@@ -252,18 +265,20 @@ public class GameManager : MonoBehaviour
 		if (activeTask < randomTaskStartIndex)
 		{
 			activeTask++;
-			DoTask(tasks[activeTask]);
+			StartCoroutine(DoTask(tasks[activeTask]));
 		}
 		else
 		{
+			//if tasks completed equals or exceeds max, end game
 			if (taskCount >= maxTasks)
 			{
 				Win();
 				return;
 			}
 
+			//otherwise, pick a random task within the random range and do it
 			activeTask = Random.Range(randomTaskStartIndex, randomTaskEndIndex+1);
-			DoTask(tasks[activeTask]);
+			StartCoroutine(DoTask(tasks[activeTask]));
 		}
 
 	}
