@@ -1987,7 +1987,7 @@ MonoBehaviour:
     complete: 0
     story: 'GREETINGS
 
-      JUNIOR CLASS F PERSONNEL
+      JUNIOR F-CLASS PERSONNEL
 
 
       YOU HAVE BEEN SELECTED
@@ -2008,11 +2008,11 @@ MonoBehaviour:
         m_Calls: []
   - name: startup2
     complete: 0
-    story: 'YOU ARE REQUIRED TO MAINTAIN THE CONTAINMENT OF SPECIMEN 05LC
+    story: 'YOU ARE REQUIRED TO MAINTAIN THE CONTAINMENT OF SPECIMEN 05LC BY COMPLETING
+      A SERIES OF TASKS
 
 
-      FAILURE
-      WILL NOT BE TOLERATED'
+      FAILURE WILL NOT BE TOLERATED'
     isTimed: 0
     timeLimit: 0
     requiresLookatDuration: 0
@@ -2039,7 +2039,50 @@ MonoBehaviour:
     timeLimit: 15
     requiresLookatDuration: 1
     durationRequired: 5
-    oneTime: 1
+    oneTime: 0
+    OnTaskStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7540499386675631205}
+          m_TargetAssemblyTypeName: SmileController, Assembly-CSharp
+          m_MethodName: ToggleSmileVisibility
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnTaskComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7540499386675631205}
+          m_TargetAssemblyTypeName: SmileController, Assembly-CSharp
+          m_MethodName: ToggleSmileVisibility
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: startupDoor
+    complete: 0
+    story: 'WARNING!
+
+      CONTAINMENT DOOR MALFUNCTION
+
+      PLEASE MAINTAIN DOOR
+      CLOSURE VIA LEVER ON THE DESK TO YOUR RIGHT'
+    isTimed: 1
+    timeLimit: 20
+    requiresLookatDuration: 0
+    durationRequired: 0
+    oneTime: 0
     OnTaskStart:
       m_PersistentCalls:
         m_Calls:
@@ -2074,12 +2117,12 @@ MonoBehaviour:
   introTextEndIndex: 2
   randomTaskStartIndex: 5
   randomTaskEndIndex: 10
-  gameOverStory: 'YOU HAVE FAILED YOUR TASK.
+  gameOverStory: 'YOU HAVE FAILED YOUR TASK
 
-    CONTAINMENT BREACH IS IMMINENT.
+    CONTAINMENT BREACH IS IMMINENT
 
     WE
-    ARE NOT RESPONSIBLE FOR IMPENDING CONSEQUENCES.'
+    ARE NOT RESPONSIBLE FOR IMPENDING CONSEQUENCES'
   taskCompleteStory: 'GOOD JOB
 
 
@@ -2087,6 +2130,14 @@ MonoBehaviour:
 
     PLEASE MAKE
     EYE CONTACT WITH THIS MONITOR TO RECIEVE YOUR NEXT TASK'
+  winStory: 'YOU HAVE COMPLETED ALL TASKS REQUIRED FOR THIS SHIFT
+
+
+    CONTAINMENT
+    WILL BE MAINTAINED
+
+
+    PLEASE AWAIT FURTHER INSTRUCTION'
 --- !u!1 &415499395
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,8 +45,11 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	[TextArea]
 	private string taskCompleteStory;
+	[SerializeField]
+	[TextArea]
+	private string winStory;
 
-	private enum TaskState { gameStart, finishTask, lastTask, failTask }
+	private enum TaskState { gameStart, finishTask, lastTask, end }
 	private TaskState taskState = TaskState.gameStart;
 
 	private int activeTask;
@@ -122,7 +125,7 @@ public class GameManager : MonoBehaviour
 			ChooseTask();
 		}
 
-		if (taskState == TaskState.failTask)
+		if (taskState == TaskState.end)
 		{
 			//wait a bit
 			yield return new WaitForSeconds(1f);
@@ -178,6 +181,7 @@ public class GameManager : MonoBehaviour
 			//if you went over the time limit before completeing the task, start game over
 			if (timeElapsed > task.timeLimit)
 			{
+				task.OnTaskComplete.Invoke();
 				GameOver();
 				yield break;
 			}
@@ -256,9 +260,17 @@ public class GameManager : MonoBehaviour
 
 	void GameOver()
 	{
-		//set task state to failed task and print game over message
-		taskState = TaskState.failTask;
+		//set task state to end and print game over message
+		taskState = TaskState.end;
 		textOver = false;
 		text.StartTyping(gameOverStory);
+	}
+
+	void Win()
+	{
+		//set task state to end and print win message
+		taskState = TaskState.end;
+		textOver = false;
+		text.StartTyping(winStory);
 	}
 }
