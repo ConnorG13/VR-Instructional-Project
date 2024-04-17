@@ -1964,6 +1964,7 @@ MonoBehaviour:
     requiresLookatDuration: 0
     durationRequired: 0
     oneTime: 0
+    startEventAfterText: 0
     OnTaskStart:
       m_PersistentCalls:
         m_Calls: []
@@ -1985,6 +1986,7 @@ MonoBehaviour:
     requiresLookatDuration: 0
     durationRequired: 0
     oneTime: 0
+    startEventAfterText: 0
     OnTaskStart:
       m_PersistentCalls:
         m_Calls: []
@@ -1998,6 +2000,7 @@ MonoBehaviour:
   gameOverStory: 
   taskCompleteStory: 
   winStory: 
+  maxTasks: 10
 --- !u!1 &415499395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6411,7 +6414,7 @@ PrefabInstance:
     - target: {fileID: 2547632407910942000, guid: af9f138ca1214ae41beb955d1406704e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2547632407910942002, guid: af9f138ca1214ae41beb955d1406704e,
         type: 3}
@@ -6431,7 +6434,7 @@ PrefabInstance:
     - target: {fileID: 2547632407910942002, guid: af9f138ca1214ae41beb955d1406704e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.19
+      value: -2.013
       objectReference: {fileID: 0}
     - target: {fileID: 2547632407910942002, guid: af9f138ca1214ae41beb955d1406704e,
         type: 3}

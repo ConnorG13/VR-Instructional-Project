@@ -30,11 +30,13 @@ public class DoorEvent : MonoBehaviour
 	IEnumerator Opening()
 	{
 		float destination;
+		float elapsedDuration = 0;
 		while (lever.localRotation.eulerAngles.x < 150)
 		{
-			destination = Mathf.Lerp(doorOne.transform.localPosition.y, 0, totalOpenDuration * Time.deltaTime);
+			destination = Mathf.Lerp(doorStartPos.y, 0, elapsedDuration/totalOpenDuration);
 			doorOne.transform.localPosition = new Vector3(doorOne.transform.localPosition.x, destination, doorOne.transform.localPosition.z);
 
+			elapsedDuration += Time.deltaTime;
 			yield return null;
 		}
 		if (lever.rotation.eulerAngles.x >= 150)
@@ -47,11 +49,13 @@ public class DoorEvent : MonoBehaviour
 	IEnumerator Closing()
 	{
 		float destination;
+		float elapsedDuration = 0;
 		while (lever.localRotation.eulerAngles.x >= 150)
 		{
-			destination = Mathf.Lerp(doorOne.transform.localPosition.y, doorStartPos.y, totalOpenDuration * Time.deltaTime);
+			destination = Mathf.Lerp(doorStartPos.y, 0, elapsedDuration / totalOpenDuration);
 			doorOne.transform.localPosition = new Vector3(doorOne.transform.localPosition.x, destination, doorOne.transform.localPosition.z);
 
+			elapsedDuration += Time.deltaTime;
 			yield return null;
 		}
 		if (lever.rotation.eulerAngles.x < 150)

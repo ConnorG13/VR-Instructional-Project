@@ -2733,41 +2733,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - name: startupDoor
-    complete: 0
-    story: 'WARNING!
-
-      CONTAINMENT DOOR MALFUNCTION
-
-      PLEASE MAINTAIN DOOR
-      CLOSURE VIA LEVER ON THE DESK
-
-
-      DO NOT LET CONTAINMENT DOOR OPEN'
-    isTimed: 0
-    timeLimit: 0
-    requiresLookatDuration: 0
-    durationRequired: 0
-    oneTime: 0
-    startEventAfterText: 0
-    OnTaskStart:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 820217057}
-          m_TargetAssemblyTypeName: DoorEvent, Assembly-CSharp
-          m_MethodName: StartOpening
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnTaskComplete:
-      m_PersistentCalls:
-        m_Calls: []
   - name: startupMonitors
     complete: 0
     story: 'VISUAL MONITORING ON SPECIMEN 05LC MUST BE INITIATED.
@@ -2930,45 +2895,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - name: keepDoorsClosed
-    complete: 0
-    story: 'WARNING!
-
-      CONTAINMENT DOOR MALFUNCTION
-
-      PLEASE MAINTAIN DOOR
-      CLOSURE VIA LEVER ON THE DESK
-
-
-      DO NOT LET CONTAINMENT DOOR OPEN'
-    isTimed: 0
-    timeLimit: 0
-    requiresLookatDuration: 0
-    durationRequired: 0
-    oneTime: 0
-    startEventAfterText: 0
-    OnTaskStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTaskComplete:
-      m_PersistentCalls:
-        m_Calls: []
-  - name: replacePowerSupply
-    complete: 0
-    story: "ERROR DETECTED IN POWER SUPPLY. \nPLEASE REPLACE FAULTY FUSE IN GENERATOR
-      BEHIND YOU WITH A NEW FUSE.\n\nYOU HAVE 20 SECONDS TO COMPLY."
-    isTimed: 1
-    timeLimit: 20
-    requiresLookatDuration: 0
-    durationRequired: 0
-    oneTime: 0
-    startEventAfterText: 0
-    OnTaskStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTaskComplete:
-      m_PersistentCalls:
-        m_Calls: []
   - name: watchMonitors
     complete: 0
     story: "THERE IS A POSSIBILITY OF IMMINENT CONTAINMENT BREACH. \nPLEASE MAINTAIN
@@ -3026,32 +2952,10 @@ MonoBehaviour:
     OnTaskComplete:
       m_PersistentCalls:
         m_Calls: []
-  - name: flipSwitches
-    complete: 0
-    story: 'FULL CONTAINMENT IS NOT YET OPERATIONAL.
-
-      FLIP ALL THE SWITCHES
-      ON THE RIGHT WALL DOWN TO ENSURE MAXIMUM OPERATIONAL STATUS.
-
-
-      YOU HAVE
-      30 SECONDS TO COMPLY.'
-    isTimed: 1
-    timeLimit: 30
-    requiresLookatDuration: 0
-    durationRequired: 0
-    oneTime: 1
-    startEventAfterText: 0
-    OnTaskStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTaskComplete:
-      m_PersistentCalls:
-        m_Calls: []
   introTextStartIndex: 1
   introTextEndIndex: 2
-  randomTaskStartIndex: 6
-  randomTaskEndIndex: 12
+  randomTaskStartIndex: 5
+  randomTaskEndIndex: 9
   gameOverStory: 'YOU HAVE FAILED YOUR TASK
 
     CONTAINMENT BREACH IS IMMINENT
@@ -3073,7 +2977,7 @@ MonoBehaviour:
 
 
     PLEASE AWAIT FURTHER INSTRUCTION'
-  maxTasks: 10
+  maxTasks: 6
 --- !u!1 &415499395
 GameObject:
   m_ObjectHideFlags: 0
