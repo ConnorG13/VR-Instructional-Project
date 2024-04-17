@@ -49,7 +49,10 @@ public class GameManager : MonoBehaviour
 	[TextArea]
 	private string winStory;
 
-	private enum TaskState { gameStart, finishTask, lastTask, end }
+	[Space(10)]
+	[SerializeField] private int maxTasks;
+
+	private enum TaskState { gameStart, finishTask, end }
 	private TaskState taskState = TaskState.gameStart;
 
 	private int activeTask;
@@ -227,8 +230,11 @@ public class GameManager : MonoBehaviour
 			tasks[activeTask].OnTaskComplete.Invoke();
 
 			//remove it from the list if should only be done once
-			//if (tasks[activeTask].oneTime)
-			//	tasks.Remove(tasks[activeTask]);
+			if (tasks[activeTask].oneTime)
+			{
+				tasks.Remove(tasks[activeTask]);
+				randomTaskEndIndex--;
+			}
 
 			//increment completed task count
 			taskCount++;
@@ -242,6 +248,23 @@ public class GameManager : MonoBehaviour
 
 	void ChooseTask()
 	{
+		//Until the active task index gets to the random index start point, keep incrementing and doing sequential tasks
+		if (activeTask < randomTaskStartIndex)
+		{
+			activeTask++;
+			DoTask(tasks[activeTask]);
+		}
+		else
+		{
+			if (taskCount >= maxTasks)
+			{
+				Win();
+				return;
+			}
+
+			activeTask = Random.Range(randomTaskStartIndex, randomTaskEndIndex+1);
+			DoTask(tasks[activeTask]);
+		}
 
 	}
 
