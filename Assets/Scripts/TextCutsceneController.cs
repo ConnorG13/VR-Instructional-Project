@@ -10,6 +10,7 @@ public class TextCutsceneController : MonoBehaviour
     public TypewriterSettings settings = new TypewriterSettings();
     private float originDelayBetweenChars;
     private bool lastCharPunctuation = false;
+	private char charNewLine;
     private char charComma;
     private char charPeriod;
 	
@@ -44,6 +45,7 @@ public class TextCutsceneController : MonoBehaviour
         if (_textComponent == null) _textComponent = GetComponent<TextMeshProUGUI>();
         originDelayBetweenChars = settings.delayBetweenChars;
 
+		charNewLine = Convert.ToChar(10);
         charComma = Convert.ToChar(44);
         charPeriod = Convert.ToChar(46);
     }
@@ -52,12 +54,13 @@ public class TextCutsceneController : MonoBehaviour
     {
         if (_clearOnStart && _textComponent) _textComponent.text = "";
 
-        StartTyping(story);
+        //StartTyping(story);
     }
 
     public void StartTyping(string text)
     {
-        story = text;
+		if (_clearOnStart && _textComponent) _textComponent.text = "";
+		story = text;
         _typingCoroutine = StartCoroutine(TypeText());
     }
 
@@ -89,7 +92,7 @@ public class TextCutsceneController : MonoBehaviour
                 lastCharPunctuation = false;
             }
 
-            if (c == charComma || c == charPeriod)
+            if (c == charComma || c == charPeriod || c == charNewLine)
             {
                 if (useAudio) TypingFX.Pause();
                 lastCharPunctuation = true;
@@ -106,6 +109,7 @@ public class TextCutsceneController : MonoBehaviour
         if (_clearOnFinish) _textComponent.text = "";
 
         OnTypingFinished.Invoke();
+		yield break;
     }
 
 }
